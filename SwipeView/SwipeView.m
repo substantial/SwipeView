@@ -1097,8 +1097,12 @@
         //update scrollOffset
         CGFloat delta = _vertical? (_scrollView.contentOffset.y - _previousContentOffset.y): (_scrollView.contentOffset.x - _previousContentOffset.x);
         _previousContentOffset = _scrollView.contentOffset;
-        _scrollOffset += delta / (_vertical? _itemSize.height: _itemSize.width);
-        
+
+        // SUBSTANTIAL: MADE THIS FIX
+        if (_itemSize.width > 0) {
+            _scrollOffset += delta / (_vertical? _itemSize.height: _itemSize.width);
+        }
+
         //update view and call delegate
         [self didScroll];
     }
